@@ -1,6 +1,5 @@
 {% macro nav_link(endpoint, name) %}
 {% if endpoint == request.endpoint %}
-<h3>some</h3>
 <li class="nav-item">
     <a class="nav-link" href="{{ url_for(endpoint) }}">
         <i class="icon-grid menu-icon"></i>
@@ -11,7 +10,7 @@
 <li class="nav-item">
     <a class="nav-link" href="{{ url_for(endpoint) }}">
         <i class="icon-grid menu-icon"></i>
-        <span class="menu-title">Dashboard</span>
+        <span class="menu-title">{{name}}</span>
     </a>
 </li>
 {% endif %}
