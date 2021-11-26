@@ -19,5 +19,7 @@ def init_db():
     # Здесь нужно импортировать все модули, где могут быть определены модели,
     # которые необходимым образом могут зарегистрироваться в метаданных.
     # В противном случае их нужно будет импортировать до вызова init_db()
-    import yourapplication.models
+    import db.models
     Base.metadata.create_all(bind=engine)
+
+init_db()
