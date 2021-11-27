@@ -23,6 +23,9 @@
                         <th>
                             Label
                         </th>
+                        <th>
+                            Действия
+                        </th>
                     </tr>
                     </thead>
                     <tbody>
@@ -37,6 +40,10 @@
                         </td>
                         <td>
                             {{type.label}}
+                        </td>
+                        <td>
+                            <a title="Удалить" href="{{ url_for('type.remove', id=type.id) }}"><i class="mdi mdi-close-box"></i></a>
+                            <a title="Редактировать" href="{{ url_for('type.edit', id=type.id) }}"><i class="mdi mdi-lead-pencil"></i></a>
                         </td>
                     </tr>
                     {% endfor %}

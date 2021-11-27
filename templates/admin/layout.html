@@ -17,10 +17,16 @@
     <link rel="stylesheet"
           href="{{ url_for('static', filename='vendors/select2-bootstrap-theme/select2-bootstrap.min.css') }}">
     <!-- End plugin css for this page -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='vendors/mdi/css/materialdesignicons.min.css') }}">
     <!-- inject:css -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/vertical-layout-light/style.css') }}">
     <!-- endinject -->
     <link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.png') }}"/>
+    <style>
+        .mdi {
+            font-size:20px;
+        }
+    </style>
 </head>
 
 <body>

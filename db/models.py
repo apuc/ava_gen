@@ -3,6 +3,20 @@ from sqlalchemy.sql.sqltypes import TEXT
 from db.base import Base
 
 
+class Crud:
+    total = 0
+
+    def __init__(self, model: Base):
+        self.model = model
+        self.total = 0
+
+    def pagination(self, page: int, per_page: int):
+        pass
+
+    def get_total(self):
+        return self.model.query.count()
+
+
 class Figure(Base):
     __tablename__ = 'figure'
     id = Column(Integer, primary_key=True, autoincrement=True, nullable=False)
@@ -73,7 +87,8 @@ class Path(Base):
     def __repr__(self):
         return '<Figure %r>' % self.id
 
-class Type(Base):
+
+class Type(Base, Crud):
     __tablename__ = 'type'
     id = Column(Integer, primary_key=True)
     label = Column(String(255, collation="utf8mb4_unicode_ci"), nullable=False)
