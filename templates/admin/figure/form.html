@@ -1,60 +1,39 @@
 {% extends 'admin/layout.html' %}
 
 {% block title %}
-    Список фигур
+Добавить фигуру
 {% endblock %}
 
 {% block content %}
-    <div class="col-lg-12 grid-margin stretch-card">
-              <div class="card">
-                <div class="card-body">
-                  <h4 class="card-title">Фигуры</h4>
-                  <div class="table-responsive pt-3">
-                    <table class="table table-bordered">
-                      <thead>
-                        <tr>
-                          <th>
-                            #
-                          </th>
-                          <th>
-                            Type
-                          </th>
-                          <th>
-                            Age
-                          </th>
-                          <th>
-                            Sex
-                          </th>
-                          <th>
-                            Random fill
-                          </th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                      {% for figure in figures %}
-
-                        <tr>
-                          <td>
-                              {{figure.id}}
-                          </td>
-                          <td>
-                            {{figure.type}}
-                          </td>
-                          <td>
-                            {{figure.age}}
-                          </td>
-                          <td>
-                            {{figure.sex}}
-                          </td>
-                          <td>
-                            {{figure.rnd_fill}}
-                          </td>
-                        </tr>
-                        {% endfor %}
-                      </tbody>
-                    </table>
-                  </div>
+<div class="col-lg-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Добавить фигуру</h4>
+            <p class="card-description">
+                Форма добавления
+            </p>
+            <form method="post" class="forms-sample" action="{{ url_for('figure.save') }}">
+                <input type="hidden" name="__id" value="{{ figure_model.id|default('') }}">
+                <div class="form-group">
+                    <label for="exampleInputUsername1">type</label>
+                    <input name="type" type="number" class="form-control" id="exampleInputUsername1" placeholder="type" value="{{ figure_model.type or '' }}">
                 </div>
-              </div>
-            </div>
+                <div class="form-group">
+                    <label for="exampleInputUsername2">age</label>
+                    <input name="age" type="number" class="form-control" id="exampleInputUsername2" placeholder="age" value="{{ figure_model.age or '' }}">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputUsername3">sex</label>
+                    <input name="sex" type="number" class="form-control" id="exampleInputUsername3" placeholder="sex" value="{{ figure_model.sex or '' }}">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputUsername4">rnd_fill</label>
+                    <input name="rnd_fill" type="number" class="form-control" id="exampleInputUsername4" placeholder="rnd_fill" value="{{ figure_model.rnd_fill or '' }}">
+                </div>
+                <button type="submit" class="btn btn-primary mr-2">Отправить</button>
+                <a href="{{ url_for('figure.index') }}" class="btn btn-light">Назад</a>
+            </form>
+        </div>
+    </div>
+</div>
 {% endblock %}

@@ -3,6 +3,7 @@ from admin.figure.routes import figure_page
 from admin.type.routes import type_page
 from admin.fill.routes import fill_page
 from admin.ava.routes import ava_page
+from admin.path.routes import path_page
 from db.base import db_session
 
 app = Flask(__name__)
@@ -11,6 +12,7 @@ app.register_blueprint(figure_page, url_prefix='/admin')
 app.register_blueprint(type_page, url_prefix='/admin')
 app.register_blueprint(fill_page, url_prefix='/admin')
 app.register_blueprint(ava_page, url_prefix='/admin')
+app.register_blueprint(path_page, url_prefix='/admin')
 
 
 @app.route('/')
