@@ -1,0 +1,31 @@
+{% extends 'admin/layout.html' %}
+
+{% block title %}
+Добавить тип
+{% endblock %}
+
+{% block content %}
+<div class="col-lg-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Добавить тип</h4>
+            <p class="card-description">
+                Форма добавления
+            </p>
+            <form method="post" class="forms-sample" action="{{ url_for('ava.save') }}">
+                <input type="hidden" name="__id" value="{{ ava_model.id|default('') }}">
+                <div class="form-group">
+                    <label for="exampleInputUsername1">Возраст</label>
+                    <input name="age" type="number" class="form-control" id="exampleInputUsername1" placeholder="Возраст" value="{{ ava_model.age or 0 }}">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputUsername2">Пол</label>
+                    <input name="sex" type="number" class="form-control" id="exampleInputUsername2" placeholder="Пол" value="{{ ava_model.sex or 0 }}">
+                </div>
+                <button type="submit" class="btn btn-primary mr-2">Отправить</button>
+                <a href="{{ url_for('ava.index') }}" class="btn btn-light">Назад</a>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
