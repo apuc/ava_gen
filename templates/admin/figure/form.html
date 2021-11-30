@@ -31,11 +31,27 @@
                 </div>
                 <div class="form-group">
                     <label for="exampleInputUsername3">sex</label>
-                    <input name="sex" type="number" class="form-control" id="exampleInputUsername3" placeholder="sex" value="{{ figure_model.sex or '' }}">
+                    <select name="sex" id="exampleInputUsername3" class="form-control">
+                        {% if figure_model.sex == 0 %}
+                            <option value="1">женский</option>
+                            <option selected value="0">мужской</option>
+                        {% else %}
+                            <option selected value="1">женский</option>
+                            <option value="0">мужской</option>
+                        {% endif %}
+                    </select>
                 </div>
                 <div class="form-group">
                     <label for="exampleInputUsername4">rnd_fill</label>
-                    <input name="rnd_fill" type="number" class="form-control" id="exampleInputUsername4" placeholder="rnd_fill" value="{{ figure_model.rnd_fill or '' }}">
+                    <select name="rnd_fill" id="exampleInputUsername4" class="form-control">
+                        {% if figure_model.rnd_fill == 0 %}
+                            <option value="1">да</option>
+                            <option selected value="0">нет</option>
+                        {% else %}
+                            <option selected value="1">да</option>
+                            <option value="0">нет</option>
+                        {% endif %}
+                    </select>
                 </div>
                 <button type="submit" class="btn btn-primary mr-2">Отправить</button>
                 <a href="{{ url_for('figure.index') }}" class="btn btn-light">Назад</a>
