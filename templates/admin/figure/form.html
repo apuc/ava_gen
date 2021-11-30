@@ -15,8 +15,15 @@
             <form method="post" class="forms-sample" action="{{ url_for('figure.save') }}">
                 <input type="hidden" name="__id" value="{{ figure_model.id|default('') }}">
                 <div class="form-group">
-                    <label for="exampleInputUsername1">type</label>
-                    <input name="type_id" type="number" class="form-control" id="exampleInputUsername1" placeholder="type_id" value="{{ figure_model.type_id or '' }}">
+                    <label for="exampleInputUsername1">type_id</label>
+                    <select name="type_id" id="exampleInputUsername1" class="form-control">
+                        {% if select_type is defined %}
+                            <option value="{{ select_type.id or '' }}">{{ select_type.label or '' }}</option>
+                        {% endif %}
+                        {% for type in types %}
+                            <option value="{{type.id}}">{{type.label}}</option>
+                        {% endfor %}
+                    </select>
                 </div>
                 <div class="form-group">
                     <label for="exampleInputUsername2">age</label>
