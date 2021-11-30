@@ -20,15 +20,29 @@
                 </div>
                 <div class="form-group">
                     <label for="exampleInputEmail2">fill</label>
-                    <input name="fill" type="text" class="form-control" id="exampleInputEmail2" placeholder="fill" value="{{ path_model.fill or '' }}">
+                    <select name="fill_id" id="exampleInputEmail2" class="form-control">
+                        {% if select_fill is defined %}
+                            <option value="{{ select_fill.id }}">{{ select_fill.value }}</option>
+                        {% endif %}
+                        {% for fill in fills %}
+                            <option value="{{fill.id}}">{{fill.value}}</option>
+                        {% endfor %}
+                    </select>
                 </div>
                 <div class="form-group">
                     <label for="exampleInputEmail3">d</label>
                     <input name="d" type="text" class="form-control" id="exampleInputEmail3" placeholder="d" value="{{ path_model.d or '' }}">
                 </div>
                 <div class="form-group">
-                    <label for="exampleInputEmail4">figure_id</label>
-                    <input name="figure_id" type="number" class="form-control" id="exampleInputEmail4" placeholder="Label" value="{{ path_model.figure_id or '' }}">
+                    <label for="exampleInputEmail4">figure</label>
+                    <select name="figure_id" id="exampleInputEmail4" class="form-control">
+                        {% if select_figure is defined %}
+                            <option value="{{ select_figure.id }}">{{ select_figure.rnd_fill }}</option>
+                        {% endif %}
+                        {% for figure in figures %}
+                            <option value="{{figure.id}}">{{figure.rnd_fill}}</option>
+                        {% endfor %}
+                    </select>
                 </div>
                 <div class="form-group">
                     <label for="exampleInputEmail5">priority</label>

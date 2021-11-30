@@ -20,7 +20,7 @@ class Crud:
 class Figure(Base):
     __tablename__ = 'figure'
     id = Column(Integer, primary_key=True, autoincrement=True, nullable=False)
-    type = Column(Integer, nullable=False)
+    type_id = Column(Integer(), ForeignKey("type.id"), nullable=False)
     age = Column(Integer, nullable=True)
     sex = Column(Integer, nullable=True, default=0)
     rnd_fill = Column(Integer, nullable=True)
@@ -77,7 +77,7 @@ class Path(Base):
     d = Column(TEXT(collation="utf8mb4_unicode_ci"), nullable=False)
     extend_fill = Column(Integer, nullable=True)
     figure_id = Column(Integer(), ForeignKey("figure.id"), nullable=False)
-    fill = Column(String(255, collation="utf8mb4_unicode_ci"), nullable=False)
+    fill_id = Column(Integer(), ForeignKey("fill.id"), nullable=False)
     priority = Column(Integer, nullable=True)
     status = Column(Integer, nullable=True)
 

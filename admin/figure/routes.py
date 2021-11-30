@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash
 from db.base import Base, db_session
-from db.models import Figure, Crud
+from db.models import Figure, Crud, Type
 from sqlalchemy import select, func, Integer, Table, Column, MetaData
 
 figure_page = Blueprint('figure', __name__, template_folder='templates')
@@ -18,7 +18,8 @@ def index(current_page):
 @figure_page.route('/figure/create', methods=['GET'])
 def create():
     figure_model = Figure()
-    return render_template('admin/figure/form.html', figure_model=figure_model)
+    types = Type().query.all()
+    return render_template('admin/figure/form.html', figure_model=figure_model, types=types)
 
 
 @figure_page.route('/figure/remove/<id>')
@@ -34,8 +35,9 @@ def remove(id):
 @figure_page.route('/figure/edit/<id>')
 def edit(id):
     figure_model = Figure.query.filter_by(id=id).first()
-
-    return render_template('admin/figure/form.html', figure_model=figure_model)
+    select_type = Type().query.filter_by(id=figure_model.type_id).first()
+    types = Type().query.filter(Type.id != figure_model.type_id).all()
+    return render_template('admin/figure/form.html', figure_model=figure_model, types=types, select_type=select_type)
 
 
 @figure_page.route('/figure/save', methods=['POST'])
@@ -46,7 +48,7 @@ def save():
     else:
         figure_model = Figure.query.filter_by(id=id).first()
 
-    figure_model.type = request.form.get('type')
+    figure_model.type_id = request.form.get('type_id')
     figure_model.age = request.form.get('age')
     figure_model.sex = request.form.get('sex')
     figure_model.rnd_fill = request.form.get('rnd_fill')
