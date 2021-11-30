@@ -46,7 +46,7 @@ def save():
     else:
         figure_model = Figure.query.filter_by(id=id).first()
 
-    figure_model.type = request.form.get('type')
+    figure_model.type_id = request.form.get('type_id')
     figure_model.age = request.form.get('age')
     figure_model.sex = request.form.get('sex')
     figure_model.rnd_fill = request.form.get('rnd_fill')

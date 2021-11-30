@@ -49,7 +49,7 @@ def save():
 
     path_model.d = request.form.get('d')
     path_model.extend_fill = request.form.get('extend_fill')
-    path_model.fill = request.form.get('fill')
+    path_model.fill_id = request.form.get('fill_id')
     path_model.priority = request.form.get('priority')
     path_model.figure_id = request.form.get('figure_id')
     path_model.status = request.form.get('status')
