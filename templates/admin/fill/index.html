@@ -33,7 +33,9 @@
                             {{fill.id}}
                         </td>
                         <td>
-                            {{fill.value}}
+                            <canvas width="50" height="50" style="background-color:{{fill.value}};">
+                                Ваш браузер не поддерживает Canvas
+                            </canvas>
                         </td>
                         <td>
                             <a title="Удалить" href="{{ url_for('fill.remove', id=fill.id) }}"><i class="mdi mdi-close-box"></i></a>
