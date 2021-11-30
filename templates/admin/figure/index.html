@@ -9,6 +9,7 @@
               <div class="card">
                 <div class="card-body">
                   <h4 class="card-title">Фигуры</h4>
+                  <a href="{{ url_for('figure.create') }}" type="button" class="btn btn-success">Добавить</a>
                   <div class="table-responsive pt-3">
                     <table class="table table-bordered">
                       <thead>
@@ -27,6 +28,9 @@
                           </th>
                           <th>
                             Random fill
+                          </th>
+                          <th>
+                            Действия
                           </th>
                         </tr>
                       </thead>
@@ -48,6 +52,10 @@
                           </td>
                           <td>
                             {{figure.rnd_fill}}
+                          </td>
+                          <td>
+                            <a title="Удалить" href="{{ url_for('figure.remove', id=figure.id) }}"><i class="mdi mdi-close-box"></i></a>
+                            <a title="Редактировать" href="{{ url_for('figure.edit', id=figure.id) }}"><i class="mdi mdi-lead-pencil"></i></a>
                           </td>
                         </tr>
                         {% endfor %}

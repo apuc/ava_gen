@@ -1,0 +1,47 @@
+{% extends 'admin/layout.html' %}
+
+{% block title %}
+Добавить тип
+{% endblock %}
+
+{% block content %}
+<div class="col-lg-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Добавить path</h4>
+            <p class="card-description">
+                Форма добавления
+            </p>
+            <form method="post" class="forms-sample" action="{{ url_for('path.save') }}">
+                <input type="hidden" name="__id" value="{{ path_model.id|default('') }}">
+                <div class="form-group">
+                    <label for="exampleInputUsername1">extend_fill</label>
+                    <input name="extend_fill" type="number" class="form-control" id="exampleInputUsername1" placeholder="extend_fill" value="{{ path_model.extend_fill or '' }}">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail2">fill</label>
+                    <input name="fill" type="text" class="form-control" id="exampleInputEmail2" placeholder="fill" value="{{ path_model.fill or '' }}">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail3">d</label>
+                    <input name="d" type="text" class="form-control" id="exampleInputEmail3" placeholder="d" value="{{ path_model.d or '' }}">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail4">figure_id</label>
+                    <input name="figure_id" type="number" class="form-control" id="exampleInputEmail4" placeholder="Label" value="{{ path_model.figure_id or '' }}">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail5">priority</label>
+                    <input name="priority" type="number" class="form-control" id="exampleInputEmail5" placeholder="priority" value="{{ path_model.priority or '' }}">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail6">status</label>
+                    <input name="status" type="number" class="form-control" id="exampleInputEmail6" placeholder="status" value="{{ path_model.status or '' }}">
+                </div>
+                <button type="submit" class="btn btn-primary mr-2">Отправить</button>
+                <a href="{{ url_for('path.index') }}" class="btn btn-light">Назад</a>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
