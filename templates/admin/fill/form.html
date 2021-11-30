@@ -15,8 +15,8 @@
             <form method="post" class="forms-sample" action="{{ url_for('fill.save') }}">
                 <input type="hidden" name="__id" value="{{ fill_model.id|default('') }}">
                 <div class="form-group">
-                    <label for="exampleInputUsername1">Value</label>
-                    <input name="value" type="text" class="form-control" id="exampleInputUsername1" placeholder="Value" value="{{ fill_model.value or '' }}">
+                    <label for="exampleInputUsername1">Color</label>
+                    <input type="color" id="exampleInputUsername1" name="value" value="{{ fill_model.value or '#ff0000' }}">
                 </div>
                 <button type="submit" class="btn btn-primary mr-2">Отправить</button>
                 <a href="{{ url_for('fill.index') }}" class="btn btn-light">Назад</a>
