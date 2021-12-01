@@ -1,4 +1,3 @@
-import uuid
 from db.models import Type
 from db.base import db_session
 
