@@ -45,12 +45,31 @@ def save():
     id = request.form.get('__id')
     if id == 'None':
         figure_model = Figure()
+        is_edit = False
     else:
         figure_model = Figure.query.filter_by(id=id).first()
+        is_edit = True
 
     figure_model.type_id = request.form.get('type_id')
+
+    if(int(request.form.get('age')) < 1):
+        flash('Возраст не может быть меньше 1')
+        if is_edit:
+            return redirect(url_for('figure.edit', id = figure_model.id))
+        else:
+            return redirect(url_for('figure.create'))
+
     figure_model.age = request.form.get('age')
-    figure_model.sex = request.form.get('sex')
+
+    if(int(request.form.get('sex')) == 0 or int(request.form.get('sex')) == 1):
+        figure_model.sex = request.form.get('sex')
+    else:
+        flash('Пол не определен')
+        if is_edit:
+            return redirect(url_for('figure.edit', id = figure_model.id))
+        else:
+            return redirect(url_for('figure.create'))
+
     figure_model.rnd_fill = request.form.get('rnd_fill')
     db_session.add(figure_model)
     db_session.commit()
