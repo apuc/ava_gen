@@ -15,7 +15,7 @@
             <form method="post" class="forms-sample" action="{{ url_for('figure.save') }}">
                 <input type="hidden" name="__id" value="{{ figure_model.id|default('') }}">
                 <div class="form-group">
-                    <label for="exampleInputUsername1">type_id</label>
+                    <label for="exampleInputUsername1">type</label>
                     <select name="type_id" id="exampleInputUsername1" class="form-control">
                         {% if select_type is defined %}
                             <option value="{{ select_type.id or '' }}">{{ select_type.label or '' }}</option>
