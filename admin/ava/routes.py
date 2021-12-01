@@ -1,8 +1,6 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash
-from db.base import Base, db_session
 from db.models import Ava, Crud
-from sqlalchemy import select, func, Integer, Table, Column, MetaData
-import uuid
+
 from services.AvaService import AvaService
 
 ava_page = Blueprint('ava', __name__, template_folder='templates')
