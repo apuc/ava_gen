@@ -8,13 +8,26 @@ class Crud:
 
     def __init__(self, model: Base):
         self.model = model
-        self.total = 0
+        self.total = self.model.query.count()
+        self.page_count = None
+        self.items = None
+        self.current_page = None
+
+        self.query = self.model.query
+
+    def set_query(self, q):
+        self.query.filter(q)
 
     def pagination(self, page: int, per_page: int):
-        pass
+        self.current_page = page
+        offset = (page - 1) * per_page
+        self.page_count = self.total // per_page
+        if (self.total % per_page) >= 1:
+            self.page_count += 1
+        self.items = self.query.limit(per_page).offset(offset).all()
 
     def get_total(self):
-        return self.model.query.count()
+        return self.total
 
 
 class Figure(Base):

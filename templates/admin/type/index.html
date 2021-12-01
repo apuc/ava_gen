@@ -29,7 +29,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    {% for type in types %}
+                    {% for type in crud.items %}
 
                     <tr>
                         <td>
@@ -42,13 +42,25 @@
                             {{type.label}}
                         </td>
                         <td>
-                            <a title="Удалить" href="{{ url_for('type.remove', id=type.id) }}"><i class="mdi mdi-close-box"></i></a>
-                            <a title="Редактировать" href="{{ url_for('type.edit', id=type.id) }}"><i class="mdi mdi-lead-pencil"></i></a>
+                            <a title="Удалить" href="{{ url_for('type.remove', id=type.id) }}"><i
+                                    class="mdi mdi-close-box"></i></a>
+                            <a title="Редактировать" href="{{ url_for('type.edit', id=type.id) }}"><i
+                                    class="mdi mdi-lead-pencil"></i></a>
                         </td>
                     </tr>
                     {% endfor %}
                     </tbody>
                 </table>
+            </div>
+            <br>
+            <div class="btn-group" role="group">
+                {% if crud.current_page > 1 %}
+                    <a href="{{ url_for('type.index', page=crud.current_page - 1) }}" type="button" class="btn btn-outline-secondary">{{crud.current_page - 1}}</a>
+                {% endif %}
+                <a type="button" class="btn btn-outline-secondary">{{crud.current_page}}</a>
+                {% if crud.current_page < crud.page_count %}
+                    <a href="{{ url_for('type.index', page=crud.current_page + 1) }}" type="button" class="btn btn-outline-secondary">{{crud.current_page + 1}}</a>
+                {% endif %}
             </div>
         </div>
     </div>

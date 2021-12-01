@@ -9,10 +9,9 @@ type_page = Blueprint('type', __name__, template_folder='templates')
 @type_page.route('/type', defaults={'current_page': 1})
 @type_page.route('/type/<current_page>')
 def index(current_page):
-    types = Type.query.all()
     crud = Crud(Type)
-    print(crud.get_total())
-    return render_template('admin/type/index.html', types=types)
+    crud.pagination(int(request.args.get('page', 1)), 2)
+    return render_template('admin/type/index.html', crud=crud)
 
 
 @type_page.route('/type/create', methods=['GET'])
