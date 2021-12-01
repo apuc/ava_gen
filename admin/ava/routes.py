@@ -45,11 +45,29 @@ def save():
     if id == 'None':
         ava_model = Ava()
         ava_model.id = str(uuid.uuid1())
+        is_edit = False
     else:
         ava_model = Ava.query.filter_by(id=id).first()
+        is_edit = True
+
+    if(int(request.form.get('age')) < 1):
+        flash('Возраст не может быть меньше 1')
+        if is_edit:
+            return redirect(url_for('ava.edit', id = ava_model.id))
+        else:
+            return redirect(url_for('ava.create'))
 
     ava_model.age = request.form.get('age')
-    ava_model.sex = request.form.get('sex')
+
+    if(int(request.form.get('sex')) == 0 or int(request.form.get('sex')) == 1):
+        ava_model.sex = request.form.get('sex')
+    else:
+        flash('Пол не определен')
+        if is_edit:
+            return redirect(url_for('ava.edit', id = ava_model.id))
+        else:
+            return redirect(url_for('ava.create'))
+
     db_session.add(ava_model)
     db_session.commit()
 

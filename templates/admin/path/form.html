@@ -16,7 +16,15 @@
                 <input type="hidden" name="__id" value="{{ path_model.id|default('') }}">
                 <div class="form-group">
                     <label for="exampleInputUsername1">extend_fill</label>
-                    <input name="extend_fill" type="number" class="form-control" id="exampleInputUsername1" placeholder="extend_fill" value="{{ path_model.extend_fill or '' }}">
+                    <select name="extend_fill" id="exampleInputUsername1" class="form-control">
+                        {% if path_model.extend_fill == 0 %}
+                            <option value="1">да</option>
+                            <option selected value="0">нет</option>
+                        {% else %}
+                            <option selected value="1">да</option>
+                            <option value="0">нет</option>
+                        {% endif %}
+                    </select>
                 </div>
                 <div class="form-group">
                     <label for="exampleInputEmail2">fill</label>
@@ -40,7 +48,7 @@
                             <option value="{{ select_figure.id }}">{{ select_figure.rnd_fill }}</option>
                         {% endif %}
                         {% for figure in figures %}
-                            <option value="{{figure.id}}">{{figure.rnd_fill}}</option>
+                            <option value="{{figure.id}}">{{figure.id}}</option>
                         {% endfor %}
                     </select>
                 </div>
@@ -50,7 +58,15 @@
                 </div>
                 <div class="form-group">
                     <label for="exampleInputEmail6">status</label>
-                    <input name="status" type="number" class="form-control" id="exampleInputEmail6" placeholder="status" value="{{ path_model.status or '' }}">
+                    <select name="status" id="exampleInputUsername1" class="form-control">
+                        {% if path_model.status == 0 %}
+                            <option value="1">активен</option>
+                            <option selected value="0">не активен</option>
+                        {% else %}
+                            <option selected value="1">активен</option>
+                            <option value="0">не активен</option>
+                        {% endif %}
+                    </select>
                 </div>
                 <button type="submit" class="btn btn-primary mr-2">Отправить</button>
                 <a href="{{ url_for('path.index') }}" class="btn btn-light">Назад</a>

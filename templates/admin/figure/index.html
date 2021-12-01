@@ -48,7 +48,11 @@
                             {{figure.age}}
                           </td>
                           <td>
-                            {{figure.sex}}
+                            {% if figure.sex == 0%}
+                                м
+                            {% else %}
+                                ж
+                            {% endif %}
                           </td>
                           <td>
                             {{figure.rnd_fill}}

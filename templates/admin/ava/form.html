@@ -20,7 +20,15 @@
                 </div>
                 <div class="form-group">
                     <label for="exampleInputUsername2">Пол</label>
-                    <input name="sex" type="number" class="form-control" id="exampleInputUsername2" placeholder="Пол" value="{{ ava_model.sex or 0 }}">
+                    <select name="sex" id="exampleInputUsername2" class="form-control">
+                        {% if ava_model.sex == 0 %}
+                            <option value="1">женский</option>
+                            <option selected value="0">мужской</option>
+                        {% else %}
+                            <option selected value="1">женский</option>
+                            <option value="0">мужской</option>
+                        {% endif %}
+                    </select>
                 </div>
                 <button type="submit" class="btn btn-primary mr-2">Отправить</button>
                 <a href="{{ url_for('ava.index') }}" class="btn btn-light">Назад</a>
