@@ -9,7 +9,7 @@ type_page = Blueprint('type', __name__, template_folder='templates')
 @type_page.route('/type/<current_page>')
 def index(current_page):
     crud = Crud(Type)
-    crud.pagination(int(request.args.get('page', 1)), 2)
+    crud.pagination(int(request.args.get('page', 1)), 5)
     return render_template('admin/type/index.html', crud=crud)
 
 

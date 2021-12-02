@@ -1,4 +1,5 @@
 {% macro pagination(crud, base_url) %}
+{% if crud.page_count > 1 %}
 <div class="btn-group" role="group">
     {% if crud.current_page > 1 %}
     <a href="{{ url_for(base_url, page=crud.current_page - 1) }}" type="button"
@@ -14,4 +15,5 @@
        class="btn btn-outline-secondary">>></a>
     {% endif %}
 </div>
+{% endif %}
 {% endmacro %}
