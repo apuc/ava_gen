@@ -5,6 +5,7 @@ from services.FigureService import FigureService
 from services.FillService import FillService
 
 from services.PathService import PathService
+from services.TypeService import TypeService
 
 path_page = Blueprint('path', __name__, template_folder='templates')
 
@@ -40,7 +41,10 @@ def edit(id):
     select_fill = FillService().get(path_model.fill_id)
     fills = Fill().query.filter(Fill.id != path_model.fill_id).all()
     select_figure = FigureService().get(path_model.figure_id)
+    select_figure.type_label = TypeService.get(select_figure.type_id).label
     figures = Figure().query.filter(Figure.id != path_model.figure_id).all()
+    for i in range(len(figures)):
+        figures[i].type_label = TypeService.get(figures[i].type_id).label
     return render_template('admin/path/form.html', path_model=path_model, select_fill=select_fill, fills = fills, select_figure=select_figure, figures=figures)
 
 
