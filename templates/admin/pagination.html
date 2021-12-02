@@ -1,0 +1,17 @@
+{% macro pagination(crud, base_url) %}
+<div class="btn-group" role="group">
+    {% if crud.current_page > 1 %}
+    <a href="{{ url_for(base_url, page=crud.current_page - 1) }}" type="button"
+       class="btn btn-outline-secondary"><<</a>
+    <a href="{{ url_for(base_url, page=crud.current_page - 1) }}" type="button" class="btn btn-outline-secondary">{{crud.current_page
+        - 1}}</a>
+    {% endif %}
+    <a type="button active" class="btn btn-outline-secondary">{{crud.current_page}}</a>
+    {% if crud.current_page < crud.page_count %}
+    <a href="{{ url_for(base_url, page=crud.current_page + 1) }}" type="button" class="btn btn-outline-secondary">{{crud.current_page
+        + 1}}</a>
+    <a href="{{ url_for(base_url, page=crud.current_page + 1) }}" type="button"
+       class="btn btn-outline-secondary">>></a>
+    {% endif %}
+</div>
+{% endmacro %}

@@ -1,3 +1,4 @@
+{% from "admin/pagination.html" import pagination with context %}
 {% extends 'admin/layout.html' %}
 
 {% block title %}
@@ -53,15 +54,7 @@
                 </table>
             </div>
             <br>
-            <div class="btn-group" role="group">
-                {% if crud.current_page > 1 %}
-                    <a href="{{ url_for('type.index', page=crud.current_page - 1) }}" type="button" class="btn btn-outline-secondary">{{crud.current_page - 1}}</a>
-                {% endif %}
-                <a type="button" class="btn btn-outline-secondary">{{crud.current_page}}</a>
-                {% if crud.current_page < crud.page_count %}
-                    <a href="{{ url_for('type.index', page=crud.current_page + 1) }}" type="button" class="btn btn-outline-secondary">{{crud.current_page + 1}}</a>
-                {% endif %}
-            </div>
+            {{ pagination(crud, 'type.index') }}
         </div>
     </div>
 </div>
