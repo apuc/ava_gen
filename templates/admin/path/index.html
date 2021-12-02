@@ -48,7 +48,11 @@
                             {{path.id}}
                         </td>
                         <td>
-                            {{path.extend_fill}}
+                            {% if path.extend_fill == 0%}
+                                нет
+                            {% else %}
+                                да
+                            {% endif %}
                         </td>
                         <td>
                             {{path.fill_id}}
@@ -60,7 +64,11 @@
                             {{path.d}}
                         </td>
                         <td>
-                            {{path.status}}
+                            {% if path.status == 0%}
+                                не активен
+                            {% else %}
+                                активен
+                            {% endif %}
                         </td>
                         <td>
                             {{path.figure_id}}
