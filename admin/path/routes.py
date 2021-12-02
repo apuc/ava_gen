@@ -14,6 +14,12 @@ path_page = Blueprint('path', __name__, template_folder='templates')
 @path_page.route('/path/<current_page>')
 def index(current_page):
     paths = PathService.find()
+    for i in range(len(paths)):
+        paths[i].fill = FillService.get(paths[i].fill_id).value
+        figure = FigureService.get(paths[i].figure_id)
+        paths[i].figure_label = TypeService.get(figure.type_id).label
+        paths[i].figure_sex = figure.sex
+        paths[i].figure_age = figure.age
     # crud = Crud(Path)
     # print(crud.get_total())
     return render_template('admin/path/index.html', paths=paths)
@@ -24,6 +30,8 @@ def create():
     path_model = Path()
     fills = FillService().find()
     figures = FigureService().find()
+    for i in range(len(figures)):
+        figures[i].type_label = TypeService.get(figures[i].type_id).label
     return render_template('admin/path/form.html', path_model=path_model, fills = fills, figures = figures)
 
 

@@ -55,7 +55,9 @@
                             {% endif %}
                         </td>
                         <td>
-                            {{path.fill_id}}
+                            <canvas width="50" height="50" style="background-color:{{path.fill}};">
+                                Ваш браузер не поддерживает Canvas
+                            </canvas>
                         </td>
                         <td>
                             {{path.priority}}
@@ -71,7 +73,13 @@
                             {% endif %}
                         </td>
                         <td>
-                            {{path.figure_id}}
+                            {{path.figure_label}}, 
+                            {{path.figure_age}}(возраст), 
+                            {% if path.figure_sex == 0 %}
+                                мужской
+                            {% else %}
+                                женский
+                            {% endif %}
                         </td>
                         <td>
                             <a title="Удалить" href="{{ url_for('path.remove', id=path.id) }}"><i class="mdi mdi-close-box"></i></a>
