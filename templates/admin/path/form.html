@@ -45,10 +45,26 @@
                     <label for="exampleInputEmail4">figure</label>
                     <select name="figure_id" id="exampleInputEmail4" class="form-control">
                         {% if select_figure is defined %}
-                            <option value="{{ select_figure.id }}">{{ select_figure.rnd_fill }}</option>
+                            <option value="{{ select_figure.id }}">
+                                {{select_figure.type_label}}, 
+                                {{select_figure.age}}(возраст),
+                                {% if select_figure.sex == 0 %}
+                                    мужской
+                                {% else %}
+                                    женский
+                                {% endif %}
+                            </option>
                         {% endif %}
                         {% for figure in figures %}
-                            <option value="{{figure.id}}">{{figure.id}}</option>
+                            <option value="{{figure.id}}">
+                                {{figure.type_label}}, 
+                                {{figure.age}}(возраст), 
+                                {% if figure.sex == 0 %}
+                                    мужской
+                                {% else %}
+                                    женский
+                                {% endif %}
+                            </option>
                         {% endfor %}
                     </select>
                 </div>

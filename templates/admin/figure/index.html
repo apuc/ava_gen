@@ -55,7 +55,11 @@
                             {% endif %}
                           </td>
                           <td>
-                            {{figure.rnd_fill}}
+                            {% if figure.rnd_fill == 0%}
+                                нет
+                            {% else %}
+                                да
+                            {% endif %}
                           </td>
                           <td>
                             <a title="Удалить" href="{{ url_for('figure.remove', id=figure.id) }}"><i class="mdi mdi-close-box"></i></a>

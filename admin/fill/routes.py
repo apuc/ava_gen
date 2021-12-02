@@ -1,7 +1,6 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash
-from db.base import Base, db_session
 from db.models import Fill, Crud
-from sqlalchemy import select, func, Integer, Table, Column, MetaData
+from services.FillService import FillService
 
 fill_page = Blueprint('fill', __name__, template_folder='templates')
 
@@ -9,9 +8,9 @@ fill_page = Blueprint('fill', __name__, template_folder='templates')
 @fill_page.route('/fill', defaults={'current_page': 1})
 @fill_page.route('/fill/<current_page>')
 def index(current_page):
-    fills = Fill.query.all()
-    crud = Crud(Fill)
-    print(crud.get_total())
+    fills = FillService.find()
+    # crud = Crud(Fill)
+    # print(crud.get_total())
     return render_template('admin/fill/index.html', fills=fills)
 
 
@@ -23,17 +22,14 @@ def create():
 
 @fill_page.route('/fill/remove/<id>')
 def remove(id):
-    fill_model = Fill.query.filter_by(id=id).first()
-    db_session.delete(fill_model)
-    db_session.commit()
-
+    FillService.remove(id)
     flash('Запись удалена')
     return redirect(url_for('fill.index'))
 
 
 @fill_page.route('/fill/edit/<id>')
 def edit(id):
-    fill_model = Fill.query.filter_by(id=id).first()
+    fill_model = FillService.get(id)
 
     return render_template('admin/fill/form.html', fill_model=fill_model)
 
@@ -41,17 +37,8 @@ def edit(id):
 @fill_page.route('/fill/save', methods=['POST'])
 def save():
     id = request.form.get('__id')
-    if id == 'None':
-        fill_model = Fill()
-    else:
-        fill_model = Fill.query.filter_by(id=id).first()
+    params = dict(value = request.form.get('value'))
+    FillService.save(id, **params)
 
-    fill_model.value = request.form.get('value')
-    db_session.add(fill_model)
-    db_session.commit()
-
-    if fill_model.id:
-        flash('Данные сохранены')
-        return redirect(url_for('fill.index'))
-    else:
-        return redirect(url_for('fill.create'))
+    flash('Данные сохранены')
+    return redirect(url_for('fill.index'))
