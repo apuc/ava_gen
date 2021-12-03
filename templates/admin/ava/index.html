@@ -1,3 +1,4 @@
+{% from "admin/pagination.html" import pagination with context %}
 {% extends 'admin/layout.html' %}
 
 {% block title %}
@@ -26,7 +27,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    {% for ava in avatars %}
+                    {% for ava in crud.items %}
 
                     <tr>
                         <td>
@@ -48,6 +49,8 @@
                     </tbody>
                 </table>
             </div>
+            <br>
+            {{ pagination(crud, 'ava.index') }}
         </div>
     </div>
 </div>

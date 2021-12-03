@@ -11,12 +11,11 @@ figure_page = Blueprint('figure', __name__, template_folder='templates')
 @figure_page.route('/figure', defaults={'current_page': 1})
 @figure_page.route('/figure/<current_page>')
 def index(current_page):
-    figures = FigureService.find()
-    for i in range(len(figures)):
-        figures[i].type_label = TypeService.get(figures[i].type_id).label
-    # crud = Crud(Figure)
-    # print(crud.get_total())
-    return render_template('admin/figure/index.html', figures=figures)
+    crud = Crud(Figure)
+    crud.pagination(int(request.args.get('page', 1)), 5)
+    for i in range(len(crud.items)):
+        crud.items[i].type_label = TypeService.get(crud.items[i].type_id).label
+    return render_template('admin/figure/index.html', crud=crud)
 
 
 @figure_page.route('/figure/create', methods=['GET'])

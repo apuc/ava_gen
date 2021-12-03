@@ -1,5 +1,5 @@
 {% extends 'admin/layout.html' %}
-
+{% from "admin/pagination.html" import pagination with context %}
 {% block title %}
 Список Path
 {% endblock %}
@@ -41,7 +41,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    {% for path in paths %}
+                    {% for path in crud.items %}
 
                     <tr>
                         <td>
@@ -90,6 +90,8 @@
                     </tbody>
                 </table>
             </div>
+            <br>
+            {{ pagination(crud, 'path.index') }}
         </div>
     </div>
 </div>

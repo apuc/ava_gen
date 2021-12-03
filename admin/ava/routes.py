@@ -9,10 +9,9 @@ ava_page = Blueprint('ava', __name__, template_folder='templates')
 @ava_page.route('/ava', defaults={'current_page': 1})
 @ava_page.route('/ava/<current_page>')
 def index(current_page):
-    avatars = AvaService.find()
-    # crud = Crud(Ava)
-    # print(crud.get_total())
-    return render_template('admin/ava/index.html', avatars=avatars)
+    crud = Crud(Ava)
+    crud.pagination(int(request.args.get('page', 1)), 5)
+    return render_template('admin/ava/index.html', crud=crud)
 
 
 @ava_page.route('/ava/create', methods=['GET'])

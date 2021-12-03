@@ -13,16 +13,15 @@ path_page = Blueprint('path', __name__, template_folder='templates')
 @path_page.route('/path', defaults={'current_page': 1})
 @path_page.route('/path/<current_page>')
 def index(current_page):
-    paths = PathService.find()
-    for i in range(len(paths)):
-        paths[i].fill = FillService.get(paths[i].fill_id).value
-        figure = FigureService.get(paths[i].figure_id)
-        paths[i].figure_label = TypeService.get(figure.type_id).label
-        paths[i].figure_sex = figure.sex
-        paths[i].figure_age = figure.age
-    # crud = Crud(Path)
-    # print(crud.get_total())
-    return render_template('admin/path/index.html', paths=paths)
+    crud = Crud(Path)
+    crud.pagination(int(request.args.get('page', 1)), 5)
+    for i in range(len(crud.items)):
+        crud.items[i].fill = FillService.get(crud.items[i].fill_id).value
+        figure = FigureService.get(crud.items[i].figure_id)
+        crud.items[i].figure_label = TypeService.get(figure.type_id).label
+        crud.items[i].figure_sex = figure.sex
+        crud.items[i].figure_age = figure.age
+    return render_template('admin/path/index.html', crud=crud)
 
 
 @path_page.route('/path/create', methods=['GET'])
