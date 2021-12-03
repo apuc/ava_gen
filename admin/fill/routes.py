@@ -8,10 +8,9 @@ fill_page = Blueprint('fill', __name__, template_folder='templates')
 @fill_page.route('/fill', defaults={'current_page': 1})
 @fill_page.route('/fill/<current_page>')
 def index(current_page):
-    fills = FillService.find()
-    # crud = Crud(Fill)
-    # print(crud.get_total())
-    return render_template('admin/fill/index.html', fills=fills)
+    crud = Crud(Fill)
+    crud.pagination(int(request.args.get('page', 1)), 5)
+    return render_template('admin/fill/index.html', crud=crud)
 
 
 @fill_page.route('/fill/create', methods=['GET'])

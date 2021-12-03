@@ -1,5 +1,5 @@
 {% extends 'admin/layout.html' %}
-
+{% from "admin/pagination.html" import pagination with context %}
 {% block title %}
     Список фигур
 {% endblock %}
@@ -35,7 +35,7 @@
                         </tr>
                       </thead>
                       <tbody>
-                      {% for figure in figures %}
+                      {% for figure in crud.items %}
 
                         <tr>
                           <td>
@@ -70,6 +70,8 @@
                       </tbody>
                     </table>
                   </div>
+                  <br>
+                  {{ pagination(crud, 'figure.index') }}
                 </div>
               </div>
             </div>
