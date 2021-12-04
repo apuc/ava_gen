@@ -12,11 +12,24 @@ class Crud:
         self.page_count = None
         self.items = None
         self.current_page = None
+        self.request_dict = {}
 
         self.query = self.model.query
 
     def set_query(self, q):
-        self.query.filter(q)
+        for key in q:
+            col = getattr(self.model, key)
+            self.query = self.query.filter(col.contains(q[key]))
+
+    def prepare_request(self, request):
+        for field in self.model.get_query_fields():
+            if field in request.args:
+                self.request_dict[field] = request.args.get(field)
+
+    def request(self, request, per_page=5):
+        self.prepare_request(request)
+        self.set_query(self.request_dict)
+        self.pagination(int(request.args.get('page', 1)), per_page)
 
     def pagination(self, page: int, per_page: int):
         self.current_page = page
@@ -111,4 +124,9 @@ class Type(Base, Crud):
         pass
 
     def __repr__(self):
-        return '<Figure %r>' % self.id
+        return '<Type %r>' % self.id
+
+    @staticmethod
+    def get_query_fields():
+        return ['id', 'slug', 'label']
+
