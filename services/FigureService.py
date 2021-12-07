@@ -23,7 +23,7 @@ class FigureService:
 
     
     @staticmethod
-    def save(id, age, sex, type_id, rnd_fill):
+    def save(id, age, sex, type_id, rnd_fill, label):
         if id == 'None':
             figure_model = Figure()
             is_edit = False
@@ -40,7 +40,7 @@ class FigureService:
             )
 
         figure_model.age = age
-
+        figure_model.label = label
         if(int(sex) == 0 or int(sex) == 1):
             figure_model.sex = sex
         else:

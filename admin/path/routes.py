@@ -14,7 +14,7 @@ path_page = Blueprint('path', __name__, template_folder='templates')
 @path_page.route('/path/<current_page>')
 def index(current_page):
     crud = Crud(Path)
-    crud.pagination(int(request.args.get('page', 1)), 5)
+    crud.pagination(int(request.args.get('page', 1)), 50)
     for i in range(len(crud.items)):
         crud.items[i].fill = FillService.get(crud.items[i].fill_id).value
         figure = FigureService.get(crud.items[i].figure_id)

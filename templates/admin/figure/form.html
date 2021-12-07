@@ -30,6 +30,10 @@
                     <input name="age" type="number" class="form-control" id="exampleInputUsername2" placeholder="age" value="{{ figure_model.age or '' }}">
                 </div>
                 <div class="form-group">
+                    <label for="exampleInputUsername5">label</label>
+                    <input name="label" type="text" class="form-control" id="exampleInputUsername5" placeholder="label" value="{{ figure_model.label or '' }}">
+                </div>
+                <div class="form-group">
                     <label for="exampleInputUsername3">sex</label>
                     <select name="sex" id="exampleInputUsername3" class="form-control">
                         {% if figure_model.sex == 0 %}

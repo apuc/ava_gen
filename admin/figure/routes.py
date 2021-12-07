@@ -12,7 +12,7 @@ figure_page = Blueprint('figure', __name__, template_folder='templates')
 @figure_page.route('/figure/<current_page>')
 def index(current_page):
     crud = Crud(Figure)
-    crud.pagination(int(request.args.get('page', 1)), 5)
+    crud.pagination(int(request.args.get('page', 1)), 50)
     for i in range(len(crud.items)):
         crud.items[i].type_label = TypeService.get(crud.items[i].type_id).label
     return render_template('admin/figure/index.html', crud=crud)
@@ -48,6 +48,7 @@ def save():
             type_id=request.form.get('type_id'),
             age=request.form.get('age'),
             rnd_fill=request.form.get('rnd_fill'),
+            label=request.form.get('label'),
             sex=request.form.get('sex')
         )
     error = FigureService.save(id, **params)
