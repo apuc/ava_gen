@@ -18,7 +18,7 @@ def index(current_page):
     for i in range(len(crud.items)):
         crud.items[i].fill = FillService.get(crud.items[i].fill_id).value
         figure = FigureService.get(crud.items[i].figure_id)
-        crud.items[i].figure_label = TypeService.get(figure.type_id).label
+        crud.items[i].figure_label = figure.label
         crud.items[i].figure_sex = figure.sex
         crud.items[i].figure_age = figure.age
     return render_template('admin/path/index.html', crud=crud)
