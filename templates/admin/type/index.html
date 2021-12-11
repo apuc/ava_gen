@@ -15,31 +15,23 @@
                 <table class="table table-bordered">
                     <thead>
                     <tr>
+                        {% for key, value in crud.model.get_query_fields().items() %}
                         <th>
-                            #
+                            {{value}}
                         </th>
-                        <th>
-                            Slug
-                        </th>
-                        <th>
-                            Label
-                        </th>
+                        {% endfor %}
                         <th>
                             Действия
                         </th>
                     </tr>
                     <tr>
+                        {% for key, value in crud.model.get_query_fields().items() %}
                         <td>
-                            <input class="form-control" type="text">
+                            <form action=""><input name="search_{{key}}" class="form-control" type="text" value="{{crud.request_dict[key]}}"></form>
                         </td>
+                        {% endfor %}
                         <td>
-                            <input class="form-control" type="text">
-                        </td>
-                        <td>
-                            <input class="form-control" type="text">
-                        </td>
-                        <td>
-                            
+
                         </td>
                     </tr>
                     </thead>
@@ -47,15 +39,11 @@
                     {% for type in crud.items %}
 
                     <tr>
+                        {% for key, value in crud.model.get_query_fields().items() %}
                         <td>
-                            {{type.id}}
+                            {{crud.get_value_by_key(type, key)}}
                         </td>
-                        <td>
-                            {{type.slug}}
-                        </td>
-                        <td>
-                            {{type.label}}
-                        </td>
+                        {% endfor %}
                         <td>
                             <a title="Удалить" href="{{ url_for('type.remove', id=type.id) }}"><i
                                     class="mdi mdi-close-box"></i></a>

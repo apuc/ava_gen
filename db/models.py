@@ -23,8 +23,9 @@ class Crud:
 
     def prepare_request(self, request):
         for field in self.model.get_query_fields():
-            if field in request.args:
-                self.request_dict[field] = request.args.get(field)
+            request_field_name = 'search_' + field
+            if request_field_name in request.args:
+                self.request_dict[field] = request.args.get(request_field_name)
 
     def request(self, request, per_page=5):
         self.prepare_request(request)
@@ -41,6 +42,10 @@ class Crud:
 
     def get_total(self):
         return self.total
+
+    @staticmethod
+    def get_value_by_key(obj, key):
+        return getattr(obj, key)
 
 
 class Figure(Base):
@@ -128,5 +133,5 @@ class Type(Base, Crud):
 
     @staticmethod
     def get_query_fields():
-        return ['id', 'slug', 'label']
+        return {'id': '#', 'slug': 'Slug', 'label': 'Label'}
 
