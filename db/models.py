@@ -52,6 +52,7 @@ class Figure(Base):
     __tablename__ = 'figure'
     id = Column(Integer, primary_key=True, autoincrement=True, nullable=False)
     type_id = Column(Integer(), ForeignKey("type.id"), nullable=False)
+    label = Column(String(255, collation="utf8mb4_unicode_ci"))
     age = Column(Integer, nullable=True)
     sex = Column(Integer, nullable=True, default=0)
     rnd_fill = Column(Integer, nullable=True)

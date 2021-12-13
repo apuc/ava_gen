@@ -10,7 +10,7 @@ ava_page = Blueprint('ava', __name__, template_folder='templates')
 @ava_page.route('/ava/<current_page>')
 def index(current_page):
     crud = Crud(Ava)
-    crud.pagination(int(request.args.get('page', 1)), 5)
+    crud.pagination(int(request.args.get('page', 1)), 50)
     return render_template('admin/ava/index.html', crud=crud)
 
 

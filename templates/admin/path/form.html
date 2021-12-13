@@ -46,6 +46,7 @@
                     <select name="figure_id" id="exampleInputEmail4" class="form-control">
                         {% if select_figure is defined %}
                             <option value="{{ select_figure.id }}">
+                                {{select_figure.label}}, 
                                 {{select_figure.type_label}}, 
                                 {{select_figure.age}}(возраст),
                                 {% if select_figure.sex == 0 %}
@@ -57,6 +58,7 @@
                         {% endif %}
                         {% for figure in figures %}
                             <option value="{{figure.id}}">
+                                {{figure.label}}, 
                                 {{figure.type_label}}, 
                                 {{figure.age}}(возраст), 
                                 {% if figure.sex == 0 %}

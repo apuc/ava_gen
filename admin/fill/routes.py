@@ -9,7 +9,7 @@ fill_page = Blueprint('fill', __name__, template_folder='templates')
 @fill_page.route('/fill/<current_page>')
 def index(current_page):
     crud = Crud(Fill)
-    crud.pagination(int(request.args.get('page', 1)), 5)
+    crud.pagination(int(request.args.get('page', 1)), 50)
     return render_template('admin/fill/index.html', crud=crud)
 
 

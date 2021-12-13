@@ -55,9 +55,13 @@
                             {% endif %}
                         </td>
                         <td>
-                            <canvas width="50" height="50" style="background-color:{{path.fill}};">
-                                Ваш браузер не поддерживает Canvas
-                            </canvas>
+                            {% if path.extend_fill == 0%}
+                                <canvas width="50" height="50" style="background-color:{{path.fill}};">
+                                    Ваш браузер не поддерживает Canvas
+                                </canvas>
+                            {% else %}
+                                rnd_fill
+                            {% endif %}
                         </td>
                         <td>
                             {{path.priority}}
