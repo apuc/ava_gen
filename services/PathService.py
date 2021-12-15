@@ -6,7 +6,7 @@ class PathService:
     
     @staticmethod
     def find():
-        return Path.query.all()
+        return Path.query.order_by('priority').all()
 
 
     @staticmethod
