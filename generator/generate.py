@@ -8,6 +8,8 @@ import random
 
 r = lambda: random.randint(0,255)
 rnd_fill = '#%02X%02X%02X' % (r(),r(),r())
+hair_fill = '#%02X%02X%02X' % (r(),r(),r())
+ice_fill = '#%02X%02X%02X' % (r(),r(),r())
 def generate():
     svg = draw.Drawing(90, 102, origin=(0, -102), displayInline=False)
     path = PathService.find()
@@ -41,7 +43,13 @@ def generate():
                 d = element.d
                 extend_fill = element.extend_fill
                 if extend_fill:
-                    fill = rnd_fill
+                    this_type = TypeService.get(figure.type_id).slug
+                    if(this_type == 'face'):
+                        fill = ice_fill
+                    elif(this_type == 'hair'):
+                        fill = hair_fill
+                    else:
+                        fill = rnd_fill
 
         if(is_d):
             svg.append(draw.Path(d = d, fill=fill))
