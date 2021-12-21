@@ -136,3 +136,13 @@ class Type(Base, Crud):
     def get_query_fields():
         return {'id': '#', 'slug': 'Slug', 'label': 'Label'}
 
+
+
+class Type_Fill(Base):
+    __tablename__ = 'type_fill'
+    id = Column(Integer, primary_key=True)
+    fill_id = Column(Integer(), ForeignKey("fill.id"), nullable=False)
+    type_id = Column(Integer(), ForeignKey("type.id"), nullable=False)
+
+    def __init__(self):
+        pass
