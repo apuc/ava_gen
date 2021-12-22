@@ -3,13 +3,15 @@ from services.PathService import PathService
 from services.TypeService import TypeService
 from services.FillService import FillService
 from services.FigureService import FigureService
+from services.Type_FillService import Type_FillService
 import drawSvg as draw
 import random
 
-r = lambda: random.randint(0,255)
-rnd_fill = '#%02X%02X%02X' % (r(),r(),r())
-hair_fill = '#%02X%02X%02X' % (r(),r(),r())
-ice_fill = '#%02X%02X%02X' % (r(),r(),r())
+rnd_fill = random.choice(FillService.find()).value
+hair_fill = FillService.get(random.choice(Type_FillService.get_by_type(7)).fill_id).value
+brows_fill = FillService.get(random.choice(Type_FillService.get_by_type(9)).fill_id).value
+eyes_fill = FillService.get(random.choice(Type_FillService.get_by_type(10)).fill_id).value
+
 def generate():
     svg = draw.Drawing(90, 102, origin=(0, -102), displayInline=False)
     path = PathService.find()
@@ -44,10 +46,12 @@ def generate():
                 extend_fill = element.extend_fill
                 if extend_fill:
                     this_type = TypeService.get(figure.type_id).slug
-                    if(this_type == 'face'):
-                        fill = ice_fill
+                    if(this_type == 'eyes'):
+                        fill = eyes_fill
                     elif(this_type == 'hair'):
                         fill = hair_fill
+                    elif(this_type == 'brows'):
+                        fill = brows_fill
                     else:
                         fill = rnd_fill
 

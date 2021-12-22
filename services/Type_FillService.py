@@ -13,6 +13,10 @@ class Type_FillService:
     def get(id):
         return Type_Fill.query.filter_by(id=id).first()
 
+    @staticmethod
+    def get_by_type(type_id):
+        return Type_Fill.query.filter_by(type_id=type_id).all()
+
 
     @staticmethod
     def remove(id):
