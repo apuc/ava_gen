@@ -1,0 +1,45 @@
+{% extends 'admin/layout.html' %}
+
+{% block title %}
+Добавить type_fill
+{% endblock %}
+
+{% block content %}
+<div class="col-lg-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Добавить type_fill</h4>
+            <p class="card-description">
+                Форма добавления
+            </p>
+            <form method="post" class="forms-sample" action="{{ url_for('type_fill.save') }}">
+                <input type="hidden" name="__id" value="{{ type_fill.id|default('') }}">
+                <div class="form-group">
+                    <label for="Fills">Color</label>
+                    <select name="fill_id" id="Fills" class="form-control">
+                        {% if select_fill is defined %}
+                            <option value="{{ select_fill.id or '' }}">{{ select_fill.value or '' }}</option>
+                        {% endif %}
+                        {% for fill in fills %}
+                            <option value="{{fill.id}}">{{fill.value}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputUsername1">type</label>
+                    <select name="type_id" id="exampleInputUsername1" class="form-control">
+                        {% if select_type is defined %}
+                            <option value="{{ select_type.id or '' }}">{{ select_type.label or '' }}</option>
+                        {% endif %}
+                        {% for type in types %}
+                            <option value="{{type.id}}">{{type.label}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary mr-2">Отправить</button>
+                <a href="{{ url_for('type_fill.index') }}" class="btn btn-light">Назад</a>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
