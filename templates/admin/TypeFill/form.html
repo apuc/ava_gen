@@ -1,19 +1,19 @@
 {% extends 'admin/layout.html' %}
 
 {% block title %}
-Добавить type_fill
+Добавить TypeFill
 {% endblock %}
 
 {% block content %}
 <div class="col-lg-12 grid-margin stretch-card">
     <div class="card">
         <div class="card-body">
-            <h4 class="card-title">Добавить type_fill</h4>
+            <h4 class="card-title">Добавить TypeFill</h4>
             <p class="card-description">
                 Форма добавления
             </p>
-            <form method="post" class="forms-sample" action="{{ url_for('type_fill.save') }}">
-                <input type="hidden" name="__id" value="{{ type_fill.id|default('') }}">
+            <form method="post" class="forms-sample" action="{{ url_for('TypeFill.save') }}">
+                <input type="hidden" name="__id" value="{{ TypeFill.id|default('') }}">
                 <div class="form-group">
                     <label for="Fills">Color</label>
                     <select name="fill_id" id="Fills" class="form-control">
@@ -37,7 +37,7 @@
                     </select>
                 </div>
                 <button type="submit" class="btn btn-primary mr-2">Отправить</button>
-                <a href="{{ url_for('type_fill.index') }}" class="btn btn-light">Назад</a>
+                <a href="{{ url_for('TypeFill.index') }}" class="btn btn-light">Назад</a>
             </form>
         </div>
     </div>

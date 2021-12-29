@@ -10,7 +10,7 @@
     <div class="card">
         <div class="card-body">
             <h4 class="card-title">Список цветов для типа</h4>
-            <a href="{{ url_for('type_fill.create') }}" type="button" class="btn btn-success">Добавить</a>
+            <a href="{{ url_for('TypeFill.create') }}" type="button" class="btn btn-success">Добавить</a>
             <div class="table-responsive pt-3">
                 <table class="table table-bordered">
                     <thead>
@@ -30,23 +30,23 @@
                     </tr>
                     </thead>
                     <tbody>
-                    {% for type_fill in crud.items %}
+                    {% for TypeFill in crud.items %}
 
                     <tr>
                         <td>
-                            {{type_fill.id}}
+                            {{TypeFill.id}}
                         </td>
                         <td>
-                            <canvas width="50" height="50" style="background-color:{{type_fill.fill}};">
+                            <canvas width="50" height="50" style="background-color:{{TypeFill.fill}};">
                                 Ваш браузер не поддерживает Canvas
                             </canvas>
                         </td>
                         <td>
-                            {{type_fill.type}}
+                            {{TypeFill.type}}
                         </td>
                         <td>
-                            <a title="Удалить" href="{{ url_for('type_fill.remove', id=type_fill.id) }}"><i class="mdi mdi-close-box"></i></a>
-                            <a title="Редактировать" href="{{ url_for('type_fill.edit', id=type_fill.id) }}"><i class="mdi mdi-lead-pencil"></i></a>
+                            <a title="Удалить" href="{{ url_for('TypeFill.remove', id=TypeFill.id) }}"><i class="mdi mdi-close-box"></i></a>
+                            <a title="Редактировать" href="{{ url_for('TypeFill.edit', id=TypeFill.id) }}"><i class="mdi mdi-lead-pencil"></i></a>
                         </td>
                     </tr>
                     {% endfor %}
@@ -54,7 +54,7 @@
                 </table>
             </div>
             <br>
-            {{ pagination(crud, 'type_fill.index') }}
+            {{ pagination(crud, 'TypeFill.index') }}
         </div>
     </div>
 </div>
