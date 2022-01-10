@@ -1,4 +1,3 @@
-from db.models import Figure, Path, Fill, Type
 from services.PathService import PathService
 from services.TypeService import TypeService
 from services.FillService import FillService
@@ -61,9 +60,3 @@ def generate():
 
 
     svg.saveSvg('example.svg')
-
-
-
-
-if __name__ == '__main__':
-    generate()
