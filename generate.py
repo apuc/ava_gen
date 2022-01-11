@@ -1,3 +1,5 @@
 from generator.generate import generate
+import os
 
-generate()
+path = os.getcwd()
+generate(path)

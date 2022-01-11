@@ -5,13 +5,16 @@ from services.FigureService import FigureService
 from services.Type_FillService import Type_FillService
 import drawSvg as draw
 import random
+import uuid
+import os
 
 rnd_fill = random.choice(FillService.find()).value
 hair_fill = FillService.get(random.choice(Type_FillService.get_by_type(7)).fill_id).value
 brows_fill = FillService.get(random.choice(Type_FillService.get_by_type(9)).fill_id).value
 eyes_fill = FillService.get(random.choice(Type_FillService.get_by_type(10)).fill_id).value
+    
 
-def generate():
+def generate(os_path):
     svg = draw.Drawing(90, 102, origin=(0, -102), displayInline=False)
     path = PathService.find()
     types = TypeService.find()
@@ -58,5 +61,13 @@ def generate():
             svg.append(draw.Path(d = d, fill=fill))
         is_d = False
 
-
-    svg.saveSvg('example.svg')
+    this_uuid = uuid.uuid4().hex
+    first_uuid = this_uuid[:4]
+    second_uuid = this_uuid[4:8]
+    try:
+        os.makedirs(f"{os_path}/files/{first_uuid}/{second_uuid}")
+    except OSError:
+        pass
+    finally:
+        print(f"{os_path}/files/{first_uuid}/{second_uuid}/{this_uuid}.svg")
+        svg.saveSvg(f"{os_path}/files/{first_uuid}/{second_uuid}/{this_uuid}.svg")
