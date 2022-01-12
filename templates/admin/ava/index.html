@@ -4,7 +4,9 @@
 {% block title %}
 Список ав
 {% endblock %}
-
+{% if url_gen is defined %}
+<a href="{{url_gen}}">Просмотреть аватарку</a>
+{% endif %}
 {% block content %}
 <div class="col-lg-12 grid-margin stretch-card">
     <div class="card">
@@ -51,7 +53,12 @@
             </div>
             <br>
             {{ pagination(crud, 'ava.index') }}
+            <button onclick="generate(event)" class="btn btn-outline-primary">Генерировать аватарку</button>
+            <div id="frame_ava">
+            </div>
         </div>
     </div>
 </div>
+<script src="{{ url_for('static', filename='static/ava_gen.js') }}"></script>
+
 {% endblock %}

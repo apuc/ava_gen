@@ -69,5 +69,5 @@ def generate(os_path):
     except OSError:
         pass
     finally:
-        print(f"{os_path}/files/{first_uuid}/{second_uuid}/{this_uuid}.svg")
         svg.saveSvg(f"{os_path}/files/{first_uuid}/{second_uuid}/{this_uuid}.svg")
+        return f"/files/{first_uuid}/{second_uuid}/{this_uuid}.svg"

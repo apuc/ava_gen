@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, send_file, redirect
 from admin.figure.routes import figure_page
 from admin.type.routes import type_page
 from admin.fill.routes import fill_page
@@ -21,6 +21,12 @@ app.register_blueprint(path_page, url_prefix='/admin')
 def hello_world():
     return render_template('index.html')
 
+@app.route('/files/<first>/<second>/<full>')
+def index(first, second, full):
+    try:
+        return send_file(f'files/{first}/{second}/{full}')
+    except:
+        return redirect('/admin/ava')
 
 @app.teardown_appcontext
 def shutdown_session(exception=None):

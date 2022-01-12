@@ -1,6 +1,8 @@
+import os
+from config import ROOT_DIR
 from flask import Blueprint, render_template, request, redirect, url_for, flash
 from db.models import Ava, Crud
-
+from generator.generate import generate
 from services.AvaService import AvaService
 
 ava_page = Blueprint('ava', __name__, template_folder='templates')
@@ -50,3 +52,14 @@ def save():
     else:
         flash('Данные сохранены')
         return redirect(url_for('ava.index'))
+
+
+@ava_page.route('/ava/gen', methods=['POST']    )
+def gen():
+    url = generate(ROOT_DIR)
+    host = os.getenv("HOST")
+    url = f"{host}{url}"
+    dct = dict(
+        url = url,
+    )
+    return dct
