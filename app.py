@@ -23,12 +23,14 @@ app.register_blueprint(api_page, url_prefix='/api')
 def hello_world():
     return render_template('index.html')
 
+
 @app.route('/files/<first>/<second>/<full>')
 def index(first, second, full):
     try:
         return send_file(f'files/{first}/{second}/{full}')
     except:
         return redirect('/admin/ava')
+
 
 @app.teardown_appcontext
 def shutdown_session(exception=None):
