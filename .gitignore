@@ -1,5 +1,6 @@
 .env
 .idea
+pm2_run.config.json
 venv/
 __pycache__/
 example.svg
