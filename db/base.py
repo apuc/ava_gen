@@ -1,14 +1,10 @@
-import os
-from dotenv import load_dotenv
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 
-load_dotenv()
+from config import MYSQL_CONF
 
-mysql_conf = os.getenv('MYSQL')
-
-engine = create_engine(mysql_conf, convert_unicode=True)
+engine = create_engine(MYSQL_CONF, convert_unicode=True)
 db_session = scoped_session(sessionmaker(autocommit=False,
                                          autoflush=False,
                                          bind=engine))
