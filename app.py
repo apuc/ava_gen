@@ -7,11 +7,9 @@ from api.routes import api_page
 from admin.type_fill.routes import type_fill_page
 from admin.path.routes import path_page
 from db.base import db_session
-from flask_socketio import SocketIO, emit
 
 app = Flask(__name__)
 app.secret_key = b'6VJ3NyYGP8rnPpWp'
-socketio = SocketIO(app)
 
 app.register_blueprint(figure_page, url_prefix='/admin')
 app.register_blueprint(type_page, url_prefix='/admin')
@@ -35,27 +33,6 @@ def index(first, second, full):
         return redirect('/admin/ava')
 
 
-@socketio.on('my event')
-def test_message(message):
-    print('my event')
-    emit('my response', {'data': message['data']})
-
-@socketio.on('message')
-def handle_message(data):
-    print(data)
-    emit('message response', {'msg': data})
-
-@socketio.on('connect')
-def test_connect():
-    print('connect')
-    emit('my response', {'data': 'Connected'})
-
-@socketio.on('disconnect')
-def test_disconnect():
-    print('disconnect')
-    print('Client disconnected')
-
-
 @app.teardown_appcontext
 def shutdown_session(exception=None):
     db_session.remove()
@@ -63,4 +40,4 @@ def shutdown_session(exception=None):
 
 if __name__ == '__main__':
     app.debug = True
-    socketio.run(app, port=8000)
+    app.run(port=8000)
